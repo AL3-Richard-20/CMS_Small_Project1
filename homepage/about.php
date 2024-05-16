@@ -1,3 +1,9 @@
+<?php
+
+   include "../includes/db.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -32,43 +38,7 @@
    <body>
 
       <!-- header section start -->
-      <div class="header_section">
-         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-               <a class="logo" href="index.html"><img src="images/logo.png"></a>
-               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-               </button>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-auto">
-                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="design.html">Our Design</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="shop.html">Shop</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
-                     </li>
-                  </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                     <div class="search_icon">
-                        <ul>
-                           <li><a href="#"><img src="images/search-icon.png"></a></li>
-                           <li><a href="#"><img src="images/user-icon.png"></a></li>
-                        </ul>
-                     </div>
-                  </form>
-               </div>
-         </nav>
-         </div>
-      </div>
+         <?php include("includes/header.php"); ?>
       <!-- header section end -->
 
       <!-- about section start -->
@@ -76,12 +46,27 @@
          <div class="container">
             <div class="about_section_2">
                <div class="row">
+                  <?php
+
+                     $query ="SELECT About_desc, About_img FROM about_us";
+                     $fetch = mysqli_query($con, $query);
+
+                     if($fetch){
+
+                        $row = mysqli_fetch_assoc($fetch);
+
+                        $about_desc = $row['About_desc'];
+                        $about_img  = $row['About_img'];
+                     }
+                  ?>
                   <div class="col-md-6">
-                     <div class="image_2"><img src="images/img-2.png"></div>
+                     <div class="image_2">
+                        <img src="<?= $about_img ?>"
+                        ></div>
                   </div>
                   <div class="col-md-6">
                      <h1 class="about_taital">About Us</h1>
-                     <p class="about_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised </p>
+                     <p class="about_text"><?= $about_desc ?></p>
                      <div class="readmore_bt"><a href="#">Read More</a></div>
                   </div>
                </div>
