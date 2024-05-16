@@ -6,12 +6,12 @@
     }
 
     // ============== Error Handlers ==================
-    // error_reporting(E_ALL);
+        // error_reporting(E_ALL);
     // ============== Error Handlers END ==============
 
 
-    $appname = "AIOS v1.0";
-    $author  = "AL3 Web Solutions";
+    $appname = "Web Dev Proj1";
+    $author  = "Dev Group";
     $website = "";
 
 
@@ -32,7 +32,7 @@
         $db_host = "localhost";
         $db_user = "root";
         $db_pass = "";
-        $db_name = "aios_db";
+        $db_name = "cms_proj1";
         
         $db['db_host'] = $db_host;
         $db['db_user'] = $db_user;
