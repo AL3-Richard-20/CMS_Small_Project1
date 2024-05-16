@@ -1,7 +1,7 @@
         <div class="header_section">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                <div class="container">
-                  <a class="logo" href="index.html"><img src="images/logo.png"></a>
+                  <a class="logo" href="index.php"><img src="<?php echo getSettingsVal('Company_Logo') ?>"></a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                      <span class="navbar-toggler-icon"></span>
                   </button>
@@ -14,13 +14,13 @@
                            <a class="nav-link" href="about.php">About</a>
                         </li>
                         <li class="nav-item" style="white-space: nowrap;">
-                           <a class="nav-link" href="design.html">Our Designs</a>
+                           <a class="nav-link" href="design.php">Our Designs</a>
                         </li>
                         <li class="nav-item" style="white-space: nowrap;">
-                           <a class="nav-link" href="shop.html">Shop</a>
+                           <a class="nav-link" href="shop.php">Shop</a>
                         </li>
                         <li class="nav-item" style="white-space: nowrap;">
-                           <a class="nav-link" href="contact.html">Contact Us</a>
+                           <a class="nav-link" href="contact.php">Contact Us</a>
                         </li>
                      </ul>
                      <!-- <form class="form-inline my-2 my-lg-0">

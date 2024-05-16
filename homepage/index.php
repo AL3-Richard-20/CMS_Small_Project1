@@ -54,64 +54,53 @@
 
                <div class="carousel-inner">
 
-                  <div class="carousel-item active">
-                     <div class="container">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <h1 class="banner_taital">Best <br> Design <br>of Furnitur</h1>
-                              <p class="banner_text">It is a long established fact that a reader will bedistracted by the readable content of </p>
-                              <div class="btn_main">
-                                 <div class="contact_bt"><a href="#">Contact US</a></div>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="image_1"><img src="images/img-1.png"></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                  <?php 
 
-                  <div class="carousel-item">
-                     <div class="container">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <h1 class="banner_taital">Best <br> Design <br>of Furnitur</h1>
-                              <p class="banner_text">It is a long established fact that a reader will bedistracted by the readable content of </p>
-                              <div class="btn_main">
-                                 <div class="contact_bt"><a href="#">Contact US</a></div>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="image_1"><img src="images/img-1.png"></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                     $columns1 = [ "Banner_Id", "Banner_head", "Banner_body", "Banner_img" ];
+                     $where1   = [ "Status" => 1 ];
+                     $orderBy1 = "Date_added DESC, Time_added DESC ";
 
-                  <div class="carousel-item">
-                     <div class="container">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <h1 class="banner_taital">Best <br> Design <br>of Furnitur</h1>
-                              <p class="banner_text">It is a long established fact that a reader will bedistracted by the readable content of </p>
-                              <div class="btn_main">
-                                 <div class="contact_bt"><a href="#">Contact US</a></div>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="image_1"><img src="images/img-1.png"></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                     $fetch1 = get('banners', $columns1, $where1, $orderBy1);
+
+                     $counter = 1;
+
+                     foreach($fetch1 as $row1){
+
+                        $banner_Id     = $row1['Banner_Id'];
+                        $banner_head   = $row1['Banner_head'];
+                        $banner_body   = $row1['Banner_body'];
+                        $banner_img    = $row1['Banner_img'];
+
+                        $active_class1 = ($counter == 1) ? 'active' : '';
+
+                        echo '<div class="carousel-item '.$active_class1.'">
+                                 <div class="container">
+                                    <div class="row">
+                                       <div class="col-md-6">
+                                          <h1 class="banner_taital">'.$banner_head.'</h1>
+                                          <p class="banner_text">'.$banner_body.'</p>
+                                          <div class="btn_main">
+                                             <div class="contact_bt"><a href="#">Contact US</a></div>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-6" style="text-align:center;">
+                                          <div class="image_1"><img src="'.$banner_img.'"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>';
+
+                        $counter++;
+                     }
+                  ?>
 
                </div>
 
                <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-                  <i style="font-style: initial;">01</i>
+                  <i class="fa fa-long-arrow-left" style="font-size:24px"></i>
                </a>
                <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-                  <i style="font-style: initial;">02</i>
+                  <i class="fa fa-long-arrow-right" style="font-size:24px"></i>
                </a>
 
             </div>
@@ -145,8 +134,8 @@
                      </div>
                      <div class="col-md-6">
                         <h1 class="about_taital">About Us</h1>
-                        <p class="about_text"><?= $about_desc ?></p>
-                        <div class="readmore_bt"><a href="#">Read More</a></div>
+                        <p class="about_text"><?= substr($about_desc, 0, 250) ?></p>
+                        <div class="readmore_bt"><a href="about.php">Read More</a></div>
                      </div>
                   </div>
                </div>
@@ -159,111 +148,80 @@
       <!--  design section start -->
          <div class="design_section layout_padding">
 
-            <h1 class="design_taital">Our Work Furniture</h1>
-            <p class="design_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteratio</p>
+            <h1 class="design_taital"><?php echo getSettingsVal('Design_section_head') ?></h1>
+            <p class="design_text"><?php echo getSettingsVal('Design_section_body') ?></p>
 
             <div id="my_slider" class="carousel slide" data-ride="carousel">
 
                <div class="carousel-inner">
 
-                  <div class="carousel-item active">
-                     <div class="container">
-                        <div class="design_section_2">
-                           <div class="row">
-                              <div class="col-md-4">
-                                 <div class="box_main">
-                                    <p class="chair_text">Chair 01</p>
-                                    <div class="image_3" href="#"><img src="images/img-3.png"></div>
-                                    <p class="chair_text">Price $100</p>
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                 </div>
-                              </div>
-                              <div class="col-md-4">
-                                 <div class="box_main">
-                                    <p class="chair_text">Chair 02</p>
-                                    <div class="image_4" href="#"><img src="images/img-4.png"></div>
-                                    <p class="chair_text">Price $100</p>
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                 </div>
-                              </div>
-                              <div class="col-md-4">
-                                 <div class="box_main">
-                                    <p class="chair_text">Table</p>
-                                    <div class="image_4" href="#"><img src="images/img-5.png"></div>
-                                    <p class="chair_text">Price $100</p>
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                  <?php
 
-                  <div class="carousel-item">
-                     <div class="container">
-                        <div class="design_section_2">
-                           <div class="row">
-                              <div class="col-md-4">
-                                 <div class="box_main">
-                                    <p class="chair_text">Chair 01</p>
-                                    <div class="image_3" href="#"><img src="images/img-3.png"></div>
-                                    <p class="chair_text">Price $100</p>
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                 </div>
-                              </div>
-                              <div class="col-md-4">
-                                 <div class="box_main">
-                                    <p class="chair_text">Chair 02</p>
-                                    <div class="image_4" href="#"><img src="images/img-4.png"></div>
-                                    <p class="chair_text">Price $100</p>
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                 </div>
-                              </div>
-                              <div class="col-md-4">
-                                 <div class="box_main">
-                                    <p class="chair_text">Table</p>
-                                    <div class="image_4" href="#"><img src="images/img-5.png"></div>
-                                    <p class="chair_text">Price $100</p>
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                     $query ="SELECT
+                                 *
+                              FROM
+                                 items
+                              WHERE
+                                 Status = 1 ";
+                              
+                     $fetch = mysqli_query($con, $query);
 
-                  <div class="carousel-item">
-                     <div class="container">
-                        <div class="design_section_2">
-                           <div class="row">
-                              <div class="col-md-4">
-                                 <div class="box_main">
-                                    <p class="chair_text">Chair 01</p>
-                                    <div class="image_3" href="#"><img src="images/img-3.png"></div>
-                                    <p class="chair_text">Price $100</p>
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
+                     $count = mysqli_num_rows($fetch);
+
+                     $total_seg = $count / 3;
+
+                     $batch = 0;
+
+                     for($i=1; $i<=$total_seg; $i++){
+
+                        $active_class = ($i == 1) ? "active" : "";
+
+                        echo '<div class="carousel-item '.$active_class.'">
+                              <div class="container">
+                                 <div class="design_section_2">
+                                    <div class="row">';
+
+                                       $query2 ="SELECT
+                                                *
+                                             FROM
+                                                items
+                                             WHERE
+                                                Status = 1 
+                                             ORDER BY 
+                                                Item_Id DESC 
+                                             LIMIT 
+                                                3 
+                                             OFFSET 
+                                                $batch ";
+
+                                       $fetch2 = mysqli_query($con, $query2);
+
+                                       while($row2 = mysqli_fetch_assoc($fetch2)){
+
+                                          $item_Id    = $row2['Item_Id'];
+                                          $item_name  = $row2['Item_name'];
+                                          $item_price = $row2['Item_price'];
+                                          $item_img   = $row2['Item_img'];
+
+                                          echo '<div class="col-md-4">
+                                                   <div class="box_main">
+                                                      <p class="chair_text">'.$item_name.'</p>
+                                                      <div class="image_3" href="#"><img src="'.$item_img.'" style="height:190px;"></div>
+                                                      <p class="chair_text">Price P'.number_format($item_price).'</p>
+                                                      <div class="buy_bt"><a href="#">Buy Now</a></div>
+                                                   </div>
+                                                </div>';
+                                       }
+
+                                    echo '</div>
                                  </div>
                               </div>
-                              <div class="col-md-4">
-                                 <div class="box_main">
-                                    <p class="chair_text">Chair 02</p>
-                                    <div class="image_4" href="#"><img src="images/img-4.png"></div>
-                                    <p class="chair_text">Price $100</p>
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                 </div>
-                              </div>
-                              <div class="col-md-4">
-                                 <div class="box_main">
-                                    <p class="chair_text">Table</p>
-                                    <div class="image_4" href="#"><img src="images/img-5.png"></div>
-                                    <p class="chair_text">Price $100</p>
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                           </div>';
+
+                           $batch = $batch + 3;
+                     }
+
+                  ?>
                   
                </div>
 
@@ -278,7 +236,7 @@
             </div>
 
             <div class="container">
-               <div class="read_bt"><a href="#">Read More</a></div>
+               <div class="read_bt"><a href="design.php">View More</a></div>
             </div>
 
          </div>
@@ -291,7 +249,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-6">
-                     <div class="imgage_6"><img src="images/img-6.png"></div>
+                     <div class="imgage_6"><img src="<?php echo getSettingsVal('Newsletter'); ?>"></div>
                   </div>
                   <div class="col-md-6">
                      <h1 class="newsletter_taital">Subscribe Newsletter</h1>
@@ -323,7 +281,7 @@
                      <div class="col-md-6">
                         <div class="map_main">
                            <div class="map-responsive">
-                              <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="360" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                              <iframe src="<?php echo getSettingsVal('Google_map') ?>" width="600" height="360" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
                            </div>
                         </div>
                      </div>
@@ -336,47 +294,7 @@
 
 
       <!-- footer section start -->
-         <div class="footer_section">
-            <div class="container">
-               <div class="footer_location_text">
-                  <ul>
-                     <li><img src="images/map-icon.png"><span class="padding_left_10"><a href="#">Loram Ipusm hosting web</a></span></li>
-                     <li><img src="images/call-icon.png"><span class="padding_left_10"><a href="#">Call : +7586656566</a></span></li>
-                     <li><img src="images/mail-icon.png"><span class="padding_left_10"><a href="#">demo@gmail.com</a></span></li>
-                  </ul>
-               </div>
-               <div class="row">
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">Useful link </h2>
-                     <div class="footer_menu">
-                        <ul>
-                           <li><a href="index.html">Home</a></li>
-                           <li><a href="about.html">About</a></li>
-                           <li><a href="design.html">Our Designe</a></li>
-                           <li><a href="contact.html">Contact Us</a></li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">Repair</h2>
-                     <p class="lorem_text">Lorem ipsum dolor sit amet, consectetur  adipiscinaliqua  Loreadipiscing </p>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                     <h2 class="useful_text">Social Media</h2>
-                     <div id="social">
-                        <a class="facebookBtn smGlobalBtn active" href="#" ></a>
-                        <a class="twitterBtn smGlobalBtn" href="#" ></a>
-                        <a class="googleplusBtn smGlobalBtn" href="#" ></a>
-                        <a class="linkedinBtn smGlobalBtn" href="#" ></a>
-                     </div>
-                  </div>
-                  <div class="col-sm-6 col-lg-3">
-                     <h1 class="useful_text">Our Repair center</h1>
-                     <p class="footer_text">Lorem ipsum dolor sit amet, consectetur adipiscinaliquaLoreadipiscing </p>
-                  </div>
-               </div>
-            </div>
-         </div>
+         <?php include("includes/footer.php"); ?>
       <!-- footer section end -->
 
 
