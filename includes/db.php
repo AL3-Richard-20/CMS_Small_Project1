@@ -439,6 +439,24 @@
             return 1;
         }
 
+
+        function getSettingsVal($sett_name){
+
+            global $con;
+
+            $query ="SELECT Sett_val FROM settings WHERE Sett_name = '".$sett_name."' ";
+            $fetch = mysqli_query($con, $query);
+
+            if($fetch){
+
+                $row = mysqli_fetch_assoc($fetch);
+
+                $sett_val = $row['Sett_val'];
+
+                return $sett_val;
+            }
+        }
+
         // insertOrUpdate()
     // ==================== CRUD Operations END ==============
 

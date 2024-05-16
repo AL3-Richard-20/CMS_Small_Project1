@@ -67,7 +67,6 @@
                   <div class="col-md-6">
                      <h1 class="about_taital">About Us</h1>
                      <p class="about_text"><?= $about_desc ?></p>
-                     <div class="readmore_bt"><a href="#">Read More</a></div>
                   </div>
                </div>
             </div>
