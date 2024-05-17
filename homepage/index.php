@@ -128,9 +128,9 @@
                         }
                      ?>
                      <div class="col-md-6">
-                        <div class="image_2">
-                           <img src="<?= $about_img ?>"
-                           ></div>
+                        <div class="image_2 text-center">
+                           <img src="<?= $about_img ?>" style="height:100%;">
+                        </div>
                      </div>
                      <div class="col-md-6">
                         <h1 class="about_taital">About Us</h1>
