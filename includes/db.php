@@ -509,12 +509,12 @@
         // }
 
 
-        // function safeString($string){
+        function safeString($string){
 
-        //     $string = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+            $string = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 
-        //     return stripslashes($string);
-        // }
+            return stripslashes($string);
+        }
 
 
         // function issetVerify($req_data){

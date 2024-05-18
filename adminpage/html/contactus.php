@@ -2,6 +2,16 @@
 
    include "../../includes/db.php";
 
+    $columns1 = [ "About_desc", "About_img" ];
+    $where1   = [ "About_Id" => 1 ];
+    $fetch1   = get('about_us', $columns1, $where1);
+
+    foreach($fetch1 as $row){
+
+        $about_desc = $row["About_desc"];
+        $about_img  = $row["About_img"];
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -25,13 +35,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
 
 
-        <title>Home</title>
+        <title>Contact Information</title>
 
 
         <!-- Custom CSS -->
         <link href="../assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
         <link href="../assets/extra-libs/c3/c3.min.css" rel="stylesheet">
         <link href="../assets/libs/morris.js/morris.css" rel="stylesheet">
+
+        <link href="../dist/css/croppie.min.css" rel="stylesheet">
 
 
         <!-- Custom CSS -->
@@ -97,7 +109,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">Home</h4>
+                        <h4 class="page-title">Contact Information</h4>
                         <div class="d-flex align-items-center">
 
                         </div>
@@ -126,11 +138,53 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <img src="../assets/images/undraw_Data_trends_re_2cdy.png" height="400" alt="">
-                    </div>
-                </div>
+                <table class="table table-striped table-hover">
+                    <thead class="table-bordered bg-secondary text-white font-weight-bold text-uppercase">
+                        <tr>
+                            <th>Setting</th>
+                            <th>Value</th>
+                            <th><span class="fa fa-cog"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Address</td>
+                            <td><?php echo getSettingsVal('Address') ?></td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="editContactInfo(6, `<?php echo getSettingsVal('Address'); ?>`)">
+                                    <span class="fa fa-pencil-alt"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number</td>
+                            <td><?php echo getSettingsVal('Phone_number') ?></td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="editContactInfo(7, `<?php echo getSettingsVal('Phone_number'); ?>`)">
+                                    <span class="fa fa-pencil-alt"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Gmail</td>
+                            <td><?php echo getSettingsVal('Gmail') ?></td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="editContactInfo(8, `<?php echo getSettingsVal('Gmail'); ?>`)">
+                                    <span class="fa fa-pencil-alt"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Google Map</td>
+                            <td><?php echo substr(getSettingsVal('Google_map'), 0, 70) ?></td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="editContactInfo(2, `<?php echo safeString(getSettingsVal('Google_map')); ?>`)">
+                                    <span class="fa fa-pencil-alt"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -147,14 +201,45 @@
     <!-- End Wrapper -->
     <!-- ============================================================== -->
 
+    <!-- about us info -->
+        <div class="modal" id="contactInfoMod">
 
+            <div class="modal-dialog">
 
-    <!-- ============================================================== -->
-    <!-- customizer Panel -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- End customizer Panel -->
-    <!-- ============================================================== -->
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">About Information</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>  
+
+                    <div class="modal-body">
+
+                        <form method="POST" id="contactInfoForm">
+
+                            <input type="hidden" name="contact_id" id="contact_id">
+
+                            <div class="form-group">
+                                <textarea class="form-control" name="contact_info" id="contact_info" cols="30" rows="10"></textarea>
+                            </div>
+
+                            <hr>
+
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-success" ><i class="fa fa-check"></i> Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    <!-- about us info -->
 
 
     
@@ -208,6 +293,51 @@
     <script src="../assets/libs/morris.js/morris.min.js"></script>
 
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
+
+    <script src="../dist/js/croppie.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            
+            $('#contactInfoForm').on('submit', function(aa){
+
+                aa.preventDefault()
+
+                var contact_Id      = $('#contact_id').val()
+                var contact_info    = $('#contact_info').val()
+
+                $.ajax({
+                    type: "POST",
+                    url: "exec/update.php",
+                    data: {
+                        action:"edit_contact",
+                        contactid:contact_Id,
+                        contactinfo:contact_info
+                    },
+                    dataType: "JSON",
+                    success: function (response) {
+                        
+                        if(response == '1'){
+
+                            location.reload()
+                        }
+                    }
+                })
+            })
+        })  
+
+
+        function editContactInfo(contact_Id, contact_value){
+
+            $('#contactInfoMod').modal('show')
+
+            $('#contact_id').val(contact_Id)
+            $('#contact_info').val(contact_value)
+
+        }
+
+    </script>
 
 </body>
 

@@ -18,12 +18,12 @@
                             <div class="user-profile dropdown m-t-20">
 
                                 <div class="user-pic">
-                                    <img src="../assets/images/users/1.jpg" alt="users" class="rounded-circle img-fluid" />
+                                    <img src="../assets/images/user_1177568.png" alt="users" class="rounded-circle img-fluid" />
                                 </div>
 
                                 <div class="user-content hide-menu m-t-10">
 
-                                    <h5 class="m-b-10 user-name font-medium">Steave Jobs</h5>
+                                    <h5 class="m-b-10 user-name font-medium"><?= $_SESSION['Fullname'] ?></h5>
 
                                     <!-- <a href="javascript:void(0)" class="btn btn-circle btn-sm m-r-5" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
@@ -98,15 +98,15 @@
                                 <span class="hide-menu"> Items</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <!-- <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="chart-morris.php
                                    " aria-expanded="false">
                                 <i class="fa fa-newspaper"></i>
                                 <span class="hide-menu"> Newsletter</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="chart-morris.php
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="contactus.php
                                    " aria-expanded="false">
                                 <i class="fa fa-phone"></i>
                                 <span class="hide-menu"> Contact Info</span>
@@ -124,8 +124,7 @@
                             </a>
                         </li> -->
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="authentication-login1.php
-                                   " aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"  href="logout.php" aria-expanded="false">
                                 <i class="fa fa-power-off"></i>
                                 <span class="hide-menu">Log Out</span>
                             </a>

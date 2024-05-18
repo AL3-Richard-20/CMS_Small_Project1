@@ -25,7 +25,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
 
 
-        <title>Title Here</title>
+        <title>Banner</title>
 
 
         <!-- Custom CSS -->
