@@ -85,14 +85,14 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="chart-morris.php
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="banners.php
                                    " aria-expanded="false">
                                 <i class="fa fa-file-alt"></i>
                                 <span class="hide-menu"> Banner</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="chart-morris.php
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="items.php
                                    " aria-expanded="false">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span class="hide-menu"> Items</span>
