@@ -151,7 +151,7 @@
                             <td>Business Logo</td>
                             <td><img src="../../homepage/<?php echo getSettingsVal('Company_Logo') ?>" width="30"></td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="editLogo2()">
                                     <span class="fa fa-pencil-alt"></span>
                                 </button>
                             </td>
@@ -160,7 +160,7 @@
                             <td>About Info</td>
                             <td><?= $about_desc ?></td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#aboutInfoMod">
                                     <span class="fa fa-pencil-alt"></span>
                                 </button>
                             </td>
@@ -220,7 +220,7 @@
     <!-- ============================================================== -->
 
 
-    <!-- business logo -->
+    <!-- about us logo -->
         <div class="modal" id="logoMod">
 
             <div class="modal-dialog">
@@ -228,7 +228,7 @@
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h4 class="modal-title">Business Logo</h4>
+                        <h4 class="modal-title">About Us Image</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>  
 
@@ -262,7 +262,89 @@
             </div>
 
         </div>
+    <!-- about us logo -->
+
     <!-- business logo -->
+        <div class="modal" id="logoMod2">
+
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Business Logo</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>  
+
+                    <div class="modal-body">
+
+                        <form method="POST" id="editLogoForm2">
+
+                            <div class="text-center">
+
+                                <p>You can resize the picture</p>
+
+                                <img src='../../homepage/<?= getSettingsVal('Company_Logo') ?>' alt='photo' id='logo_pic2'>
+
+                            </div>
+
+                            <input type="file" id="upload2"> 
+
+                            <hr>
+
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-success" ><i class="fa fa-check"></i> Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    <!-- business logo -->
+
+    <!-- about us info -->
+        <div class="modal" id="aboutInfoMod">
+
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">About Information</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>  
+
+                    <div class="modal-body">
+
+                        <form method="POST" id="aboutInfoForm">
+
+                            <div class="form-group">
+                                <textarea class="form-control" name="about_info" id="about_info" cols="30" rows="10"><?= $about_desc ?></textarea>
+                            </div>
+
+                            <hr>
+
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-success" ><i class="fa fa-check"></i> Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    <!-- about us info -->
 
 
     
@@ -361,6 +443,80 @@
 
                 })
             })
+
+            $('#editLogoForm2').on('submit', function(ab){
+
+                ab.preventDefault()
+
+                $uploadCrop.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then(function (resp) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "exec/update.php",
+                        data: {
+                            image2:resp,
+                            action:"business_logo_img"
+                        },
+                        dataType: "JSON",
+                        success: function (response) {
+                            
+                            if(response == '1'){
+
+                                location.reload()
+                            }
+
+                            else if(response == '2'){
+                                
+                                alert('Something went wrong')
+                            }
+
+                            else if(response == '3'){
+                                
+                                alert('Item has been missing')
+                            }
+                        }
+                    })
+
+                })
+            })
+
+            $('#aboutInfoForm').on('submit', function(ac){
+
+                ac.preventDefault()
+
+                var about_info = $('#about_info').val()
+
+                $.ajax({
+                    type: "POST",
+                    url: "exec/update.php",
+                    data: {
+                        aboutinfo:about_info,
+                        action:"about_us_desc"
+                    },
+                    dataType: "JSON",
+                    success: function (response) {
+                        
+                        if(response == '1'){
+
+                            location.reload()
+                        }
+
+                        else if(response == '2'){
+                            
+                            alert('Something went wrong')
+                        }
+
+                        else if(response == '3'){
+                            
+                            alert('Item has been missing')
+                        }
+                    }
+                })
+            })
+            
         })
 
         $uploadCrop = $('#logo_pic').croppie({
@@ -373,6 +529,19 @@
             boundary: {
                 width: 300,
                 height: 300
+            }
+        })
+
+        $uploadCrop = $('#logo_pic2').croppie({
+            viewport: {
+                width: 200,
+                height: 100,
+                type: 'square'
+            },
+            enforceBoundary:false,
+            boundary: {
+                width: 300,
+                height: 200
             }
         })
 
@@ -390,11 +559,31 @@
             reader.readAsDataURL(this.files[0]);
         })
 
+        $('#upload2').on('change', function () { 
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $uploadCrop.croppie('bind', {
+                    url: e.target.result
+                }).then(function(){
+                    console.log('jQuery bind complete');
+                });
+                
+            }
+            reader.readAsDataURL(this.files[0]);
+        })
+
         function editLogo(){
 
             $('#logoMod').modal('show')
 
             $('#logo_pic').croppie('bind')
+        }
+
+        function editLogo2(){
+
+            $('#logoMod2').modal('show')
+
+            $('#logo_pic2').croppie('bind')
         }
 
     </script>
