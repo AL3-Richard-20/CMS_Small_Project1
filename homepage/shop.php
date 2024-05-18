@@ -45,7 +45,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-6">
-                     <div class="imgage_6"><img src="<?php echo getSettingsVal('Newsletter'); ?>"></div>
+                     <div class="imgage_6"><img src="<?php echo getSettingsVal('Newsletter'); ?>" style="width:100%;"></div>
                   </div>
                   <div class="col-md-6">
                      <h1 class="newsletter_taital">Subscribe Newsletter</h1>

@@ -35,7 +35,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
 
 
-        <title>Title Here</title>
+        <title>About Us</title>
 
 
         <!-- Custom CSS -->
@@ -170,6 +170,15 @@
                             <td><img src="../../homepage/<?= $about_img ?>" width="30"></td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm" onclick="editLogo()">
+                                    <span class="fa fa-pencil-alt"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Newsletter Image</td>
+                            <td><img src="../../homepage/<?php echo getSettingsVal('Newsletter') ?>" width="30"></td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="editLogo3()">
                                     <span class="fa fa-pencil-alt"></span>
                                 </button>
                             </td>
@@ -346,6 +355,50 @@
         </div>
     <!-- about us info -->
 
+    <!-- newsletter logo -->
+        <div class="modal" id="logoMod3">
+
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Business Logo</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>  
+
+                    <div class="modal-body">
+
+                        <form method="POST" id="editLogoForm3">
+
+                            <div class="text-center">
+
+                                <p>You can resize the picture</p>
+
+                                <img src='../../homepage/<?= getSettingsVal('Newsletter') ?>' alt='photo' id='logo_pic3'>
+
+                            </div>
+
+                            <input type="file" id="upload3"> 
+
+                            <hr>
+
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-success" ><i class="fa fa-check"></i> Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    <!-- newsletter logo -->
+
 
     
     <!-- ============================================================== -->
@@ -409,7 +462,7 @@
 
                 aa.preventDefault()
 
-                $uploadCrop.croppie('result', {
+                $uploadCrop1.croppie('result', {
                     type: 'canvas',
                     size: 'viewport'
                 }).then(function (resp) {
@@ -448,7 +501,7 @@
 
                 ab.preventDefault()
 
-                $uploadCrop.croppie('result', {
+                $uploadCrop2.croppie('result', {
                     type: 'canvas',
                     size: 'viewport'
                 }).then(function (resp) {
@@ -516,10 +569,49 @@
                     }
                 })
             })
+
+            $('#editLogoForm3').on('submit', function(ad){
+
+                ad.preventDefault()
+
+                $uploadCrop3.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then(function (resp) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "exec/update.php",
+                        data: {
+                            image3:resp,
+                            action:"newsletter_logo_img"
+                        },
+                        dataType: "JSON",
+                        success: function (response) {
+                            
+                            if(response == '1'){
+
+                                location.reload()
+                            }
+
+                            else if(response == '2'){
+                                
+                                alert('Something went wrong')
+                            }
+
+                            else if(response == '3'){
+                                
+                                alert('Item has been missing')
+                            }
+                        }
+                    })
+
+                })
+            })
             
         })
 
-        $uploadCrop = $('#logo_pic').croppie({
+        $uploadCrop1 = $('#logo_pic').croppie({
             viewport: {
                 width: 200,
                 height: 200,
@@ -532,7 +624,20 @@
             }
         })
 
-        $uploadCrop = $('#logo_pic2').croppie({
+        $uploadCrop2 = $('#logo_pic2').croppie({
+            viewport: {
+                width: 200,
+                height: 100,
+                type: 'square'
+            },
+            enforceBoundary:false,
+            boundary: {
+                width: 300,
+                height: 200
+            }
+        })
+
+        $uploadCrop3 = $('#logo_pic3').croppie({
             viewport: {
                 width: 200,
                 height: 100,
@@ -549,7 +654,7 @@
         $('#upload').on('change', function () { 
             var reader = new FileReader();
             reader.onload = function (e) {
-                $uploadCrop.croppie('bind', {
+                $uploadCrop1.croppie('bind', {
                     url: e.target.result
                 }).then(function(){
                     console.log('jQuery bind complete');
@@ -562,7 +667,20 @@
         $('#upload2').on('change', function () { 
             var reader = new FileReader();
             reader.onload = function (e) {
-                $uploadCrop.croppie('bind', {
+                $uploadCrop2.croppie('bind', {
+                    url: e.target.result
+                }).then(function(){
+                    console.log('jQuery bind complete');
+                });
+                
+            }
+            reader.readAsDataURL(this.files[0]);
+        })
+
+        $('#upload3').on('change', function () { 
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $uploadCrop3.croppie('bind', {
                     url: e.target.result
                 }).then(function(){
                     console.log('jQuery bind complete');
@@ -584,6 +702,13 @@
             $('#logoMod2').modal('show')
 
             $('#logo_pic2').croppie('bind')
+        }
+
+        function editLogo3(){
+
+            $('#logoMod3').modal('show')
+
+            $('#logo_pic3').croppie('bind')
         }
 
     </script>

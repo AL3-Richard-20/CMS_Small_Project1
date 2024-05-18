@@ -15,7 +15,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Fiu</title>
+      <title>Homepage</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -249,7 +249,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-6">
-                     <div class="imgage_6"><img src="<?php echo getSettingsVal('Newsletter'); ?>"></div>
+                     <div class="imgage_6"><img src="<?php echo getSettingsVal('Newsletter'); ?>" style="width:100%;"></div>
                   </div>
                   <div class="col-md-6">
                      <h1 class="newsletter_taital">Subscribe Newsletter</h1>

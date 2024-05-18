@@ -4,7 +4,7 @@
                   <ul>
                      <li><img src="images/map-icon.png"><span class="padding_left_10"><a href="#"><?php echo getSettingsVal('Address') ?></a></span></li>
                      <li><img src="images/call-icon.png"><span class="padding_left_10"><a href="#">Call : <?php echo getSettingsVal('Phone_number') ?></a></span></li>
-                     <li><img src="images/mail-icon.png"><span class="padding_left_10"><a href="#"><?php echo getSettingsVal('Gmail') ?></a></span></li>
+                     <li><img src="images/mail-icon.png"><span class="padding_left_10"><a href="#"><?php echo substr(getSettingsVal('Gmail'), 0, 15)."..." ?></a></span></li>
                   </ul>
                </div>
                <div class="row">
